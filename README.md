@@ -84,28 +84,28 @@ flowchart TB
     style TOOL fill:#F8F8F8,stroke:#666666,stroke-width:1.5px
 ```
 
-1. OpenClaw 在 `before_tool_call` 阶段调用本地扩展 [index.ts](/Users/fanjiang/Documents/riskops/.openclaw/extensions/openclaw-risk-guard/index.ts)。
+1. OpenClaw 在 `before_tool_call` 阶段调用本地扩展 [index.ts](.openclaw/extensions/openclaw-risk-guard/index.ts)。
 2. 扩展把工具名、参数、来源和事件摘要发给本地风险服务。
-3. 风险服务 [server.py](/Users/fanjiang/Documents/riskops/risk_guard/server.py) 调用策略引擎 [policy.py](/Users/fanjiang/Documents/riskops/risk_guard/policy.py) 做规则判定。
+3. 风险服务 [server.py](risk_guard/server.py) 调用策略引擎 [policy.py](risk_guard/policy.py) 做规则判定。
 4. 如果配置了千问兼容接口，再叠加一次模型语义判断。
 5. 服务返回：
    - `allow`：直接放行
    - `confirm`：进入 OpenClaw 原生审批，并写入待审批记录
    - `block`：直接阻断
-6. 审计和审批状态写入 SQLite：[risk_guard.db](/Users/fanjiang/Documents/riskops/data/risk_guard.db)
+6. 审计和审批状态写入 SQLite：[risk_guard.db](data/risk_guard.db)
 
 ## 目录
 
-- [main.py](/Users/fanjiang/Documents/riskops/main.py)
-- [risk_guard/server.py](/Users/fanjiang/Documents/riskops/risk_guard/server.py)
-- [risk_guard/policy.py](/Users/fanjiang/Documents/riskops/risk_guard/policy.py)
-- [risk_guard/store.py](/Users/fanjiang/Documents/riskops/risk_guard/store.py)
-- [risk_guard/pai_client.py](/Users/fanjiang/Documents/riskops/risk_guard/pai_client.py)
-- [config/policy.json](/Users/fanjiang/Documents/riskops/config/policy.json)
-- [.openclaw/extensions/openclaw-risk-guard/index.ts](/Users/fanjiang/Documents/riskops/.openclaw/extensions/openclaw-risk-guard/index.ts)
-- [ui/index.html](/Users/fanjiang/Documents/riskops/ui/index.html)
-- [ui/index.js](/Users/fanjiang/Documents/riskops/ui/index.js)
-- [ui/index.css](/Users/fanjiang/Documents/riskops/ui/index.css)
+- [main.py](main.py)
+- [risk_guard/server.py](risk_guard/server.py)
+- [risk_guard/policy.py](risk_guard/policy.py)
+- [risk_guard/store.py](risk_guard/store.py)
+- [risk_guard/pai_client.py](risk_guard/pai_client.py)
+- [config/policy.json](config/policy.json)
+- [.openclaw/extensions/openclaw-risk-guard/index.ts](.openclaw/extensions/openclaw-risk-guard/index.ts)
+- [ui/index.html](ui/index.html)
+- [ui/index.js](ui/index.js)
+- [ui/index.css](ui/index.css)
 
 ## 本地启动
 
@@ -130,11 +130,11 @@ curl http://127.0.0.1:8099/health
 
 OpenClaw 配置文件路径：
 
-- [~/.openclaw/openclaw.json](/Users/fanjiang/.openclaw/openclaw.json)
+- `~/.openclaw/openclaw.json`
 
 扩展目录：
 
-- [.openclaw/extensions/openclaw-risk-guard](/Users/fanjiang/Documents/riskops/.openclaw/extensions/openclaw-risk-guard)
+- [.openclaw/extensions/openclaw-risk-guard](.openclaw/extensions/openclaw-risk-guard)
 
 关键配置项：
 
@@ -148,7 +148,7 @@ OpenClaw 配置文件路径：
 
 审批弹框示意：
 
-![OpenClaw approval dialog](/Users/fanjiang/Documents/riskops/docs/images/approval-dialog.png.jpg)
+![OpenClaw approval dialog](docs/images/approval-dialog.jpg)
 
 ## 风险判定接口
 
@@ -208,14 +208,14 @@ curl -X POST http://127.0.0.1:8099/v1/confirm \
 
 为了定位 OpenClaw 事件结构和服务入参，当前会额外写两类调试日志：
 
-- [/tmp/openclaw-risk-guard-event.jsonl](/tmp/openclaw-risk-guard-event.jsonl)
+- `/tmp/openclaw-risk-guard-event.jsonl`
   - 记录扩展在 `before_tool_call` 收到的原始事件和归一化 payload
-- [/tmp/risk-guard-evaluate.jsonl](/tmp/risk-guard-evaluate.jsonl)
+- `/tmp/risk-guard-evaluate.jsonl`
   - 记录风险服务收到的 `/v1/evaluate` 原始请求
 
 ## 当前策略覆盖
 
-当前 [config/policy.json](/Users/fanjiang/Documents/riskops/config/policy.json) 已覆盖这些确认或阻断场景：
+当前 [config/policy.json](config/policy.json) 已覆盖这些确认或阻断场景：
 
 - `web_search`
 - `exec / shell / script / run`
@@ -235,7 +235,7 @@ curl -X POST http://127.0.0.1:8099/v1/confirm \
 
 对应实现：
 
-- [risk_guard/server.py](/Users/fanjiang/Documents/riskops/risk_guard/server.py)
+- [risk_guard/server.py](risk_guard/server.py)
 
 注意：
 
@@ -248,7 +248,7 @@ curl -X POST http://127.0.0.1:8099/v1/confirm \
 
 环境变量见：
 
-- [.env.example](/Users/fanjiang/Documents/riskops/.env.example)
+- [.env.example](.env.example)
 
 关键项：
 
@@ -262,10 +262,10 @@ curl -X POST http://127.0.0.1:8099/v1/confirm \
 
 已包含这些训练与部署辅助文件：
 
-- [tools/pai_distillation/generate_dataset.py](/Users/fanjiang/Documents/riskops/tools/pai_distillation/generate_dataset.py)
-- [examples/pai/security_judge_seeds.jsonl](/Users/fanjiang/Documents/riskops/examples/pai/security_judge_seeds.jsonl)
-- [config/pai/distillation_job.template.json](/Users/fanjiang/Documents/riskops/config/pai/distillation_job.template.json)
-- [config/pai/eas_openai_compatible.template.json](/Users/fanjiang/Documents/riskops/config/pai/eas_openai_compatible.template.json)
+- [tools/pai_distillation/generate_dataset.py](tools/pai_distillation/generate_dataset.py)
+- [examples/pai/security_judge_seeds.jsonl](examples/pai/security_judge_seeds.jsonl)
+- [config/pai/distillation_job.template.json](config/pai/distillation_job.template.json)
+- [config/pai/eas_openai_compatible.template.json](config/pai/eas_openai_compatible.template.json)
 
 ## 当前边界
 

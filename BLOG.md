@@ -160,7 +160,7 @@ flowchart TB
 
 下面这张图，是当前审批弹框的一个实际效果。它比最初的版本已经清楚很多，至少用户能直接看到“即将执行什么”和“为什么需要确认”。
 
-![OpenClaw approval dialog](/Users/fanjiang/Documents/riskops/docs/images/approval-dialog.png.jpg)
+![OpenClaw approval dialog](docs/images/approval-dialog.jpg)
 
 我认为这一点很重要。安全审批如果不能支持“可决策”，最后要么沦为纯形式，要么把用户训练成无脑点通过。对 Agent 系统来说，审批不是为了让系统显得更谨慎，而是为了让用户在最小成本下做出正确判断。
 
