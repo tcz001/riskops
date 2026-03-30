@@ -1,0 +1,41 @@
+{
+  "name": "openclaw-risk-guard",
+  "version": "0.1.0",
+  "description": "Prompt injection and risky tool-call guard for OpenClaw gateway.",
+  "author": {
+    "name": "fanjiang",
+    "email": "fanjiang@example.com",
+    "url": "https://github.com/fanjiang"
+  },
+  "homepage": "https://docs.openclaw.ai/tools/plugin",
+  "repository": "https://github.com/fanjiang/riskops",
+  "license": "MIT",
+  "keywords": [
+    "openclaw",
+    "security",
+    "risk-guard",
+    "prompt-injection"
+  ],
+  "hooks": "./hooks.json",
+  "interface": {
+    "displayName": "OpenClaw Risk Guard",
+    "shortDescription": "Intercept risky MCP and skill actions before execution.",
+    "longDescription": "A sidecar safety layer that evaluates prompt injection, sensitive side effects, and high-risk MCP or skill calls, then blocks or requests explicit user approval.",
+    "developerName": "fanjiang",
+    "category": "Security",
+    "capabilities": [
+      "Interactive",
+      "Security",
+      "Write"
+    ],
+    "websiteURL": "https://docs.openclaw.ai/automation/hooks",
+    "privacyPolicyURL": "https://docs.openclaw.ai/tools/plugin",
+    "termsOfServiceURL": "https://docs.openclaw.ai/tools/plugin",
+    "defaultPrompt": [
+      "Review MCP calls for risky side effects.",
+      "Require approval before destructive skill actions.",
+      "Block prompt injection before tools execute."
+    ],
+    "brandColor": "#B04A1A"
+  }
+}

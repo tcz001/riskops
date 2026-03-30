@@ -1,0 +1,15 @@
+{
+  "name": "openclaw-security-judge-distillation",
+  "seed_count": 17,
+  "instruction_count": 17,
+  "labeled_count": 17,
+  "seed_source": "/Users/fanjiang/Documents/riskops/examples/pai/security_judge_seeds.jsonl",
+  "instruction_output": "/Users/fanjiang/Documents/riskops/examples/pai/distillation/instruction_only.verify.jsonl",
+  "labeled_output": "/Users/fanjiang/Documents/riskops/examples/pai/distillation/labeled_companion.verify.jsonl",
+  "format": "jsonl",
+  "required_input_field": "instruction",
+  "notes": [
+    "PAI distillation input should keep instruction-only records.",
+    "Use the labeled companion file for offline validation and teacher QA."
+  ]
+}

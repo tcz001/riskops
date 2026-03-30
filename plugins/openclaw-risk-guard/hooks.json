@@ -1,0 +1,4 @@
+{
+  "note": "OpenClaw current docs indicate Codex/Claude style bundle hooks are detected as metadata, but native runtime hooks should be implemented via workspace/global extensions. See ../.openclaw/extensions/openclaw-risk-guard/index.ts for the actual executable integration."
+}
+

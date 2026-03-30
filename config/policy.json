@@ -1,0 +1,129 @@
+{
+  "destructive_verbs": [
+    "delete",
+    "remove",
+    "update",
+    "write",
+    "edit",
+    "patch",
+    "create",
+    "insert",
+    "drop",
+    "purchase",
+    "pay",
+    "exec",
+    "deploy"
+  ],
+  "tool_rules": [
+    {
+      "code": "exec_confirmation",
+      "title": "命令执行确认",
+      "detail": "该操作将执行命令、脚本或程序，可能修改本地环境、安装依赖、访问网络或触发不可逆副作用。",
+      "severity": "warning",
+      "action": "confirm",
+      "score": 0.9,
+      "tool_names": ["exec", "shell", "terminal", "bash", "sh", "zsh", "command", "script", "run"],
+      "param_keywords": ["rm ", "mv ", "cp ", "chmod", "chown", "sudo", "curl ", "wget ", "npm install", "pip install", "brew install", "git push", "deploy", "restart", "kill "]
+    },
+    {
+      "code": "file_write_confirmation",
+      "title": "文件写入或删除",
+      "detail": "该操作会改写、创建、删除或覆盖文件内容，可能影响源码、配置、证书或运行环境。",
+      "severity": "warning",
+      "action": "confirm",
+      "score": 0.9,
+      "tool_names": ["write", "edit", "patch", "delete", "remove", "unlink", "save", "overwrite", "create_file"],
+      "param_keywords": [".env", ".ssh", "authorized_keys", "config", "settings", "credential", "secret", "token", "private_key"]
+    },
+    {
+      "code": "mcp_write_action",
+      "title": "MCP 写操作",
+      "detail": "检测到 MCP 工具存在写入或修改外部系统状态的可能。",
+      "severity": "critical",
+      "action": "confirm",
+      "score": 0.92,
+      "source": "mcp",
+      "param_keywords": ["write", "create", "update", "delete", "insert", "purchase", "payment", "order"]
+    },
+    {
+      "code": "skill_sensitive_action",
+      "title": "Skill 敏感副作用",
+      "detail": "Skill 可能触发命令执行、文件改写、发布、部署或外呼等副作用。",
+      "severity": "warning",
+      "action": "confirm",
+      "score": 0.84,
+      "source": "skill",
+      "param_keywords": ["exec", "shell", "deploy", "publish", "write", "patch", "commit"]
+    },
+    {
+      "code": "outbound_send_confirmation",
+      "title": "对外发送或同步",
+      "detail": "该操作会向外部系统发送消息、邮件、评论、Webhook 或同步数据，可能导致内容外发。",
+      "severity": "warning",
+      "action": "confirm",
+      "score": 0.86,
+      "tool_names": ["send", "email", "mail", "message", "notify", "post", "comment", "publish", "webhook", "sessions_send", "sync"],
+      "param_keywords": ["recipient", "email", "phone", "webhook", "channel", "sessionKey", "message", "body"]
+    },
+    {
+      "code": "database_write_confirmation",
+      "title": "数据库写操作",
+      "detail": "该操作可能新增、更新或删除数据库中的数据，存在业务和数据一致性风险。",
+      "severity": "critical",
+      "action": "confirm",
+      "score": 0.93,
+      "tool_names": ["insert", "update", "delete", "upsert", "create_record", "drop", "alter", "migrate"],
+      "param_keywords": ["insert", "update", "delete", "truncate", "drop table", "alter table", "migration"]
+    },
+    {
+      "code": "deployment_confirmation",
+      "title": "部署或生产变更",
+      "detail": "该操作会部署、发布、重启、扩缩容或修改线上配置，可能直接影响生产环境。",
+      "severity": "critical",
+      "action": "confirm",
+      "score": 0.95,
+      "tool_names": ["deploy", "release", "publish", "restart", "rollout", "scale"],
+      "param_keywords": ["production", "prod", "deploy", "release", "restart", "rollout", "scale", "dns", "kubernetes", "helm"]
+    },
+    {
+      "code": "payment_risk",
+      "title": "支付或下单风险",
+      "detail": "检测到支付、下单、转账或扣费相关操作。",
+      "severity": "critical",
+      "action": "confirm",
+      "score": 0.98,
+      "tool_names": ["payment", "order", "checkout", "purchase", "transfer"],
+      "param_keywords": ["pay", "payment", "purchase", "checkout", "order", "transfer", "invoice"]
+    },
+    {
+      "code": "sensitive_read_confirmation",
+      "title": "敏感信息读取",
+      "detail": "该操作可能读取秘钥、凭据、环境变量或其他敏感配置，需要人工确认读取必要性。",
+      "severity": "critical",
+      "action": "confirm",
+      "score": 0.94,
+      "tool_names": ["read", "cat", "open", "fetch_file"],
+      "param_keywords": [".env", ".ssh", "id_rsa", "id_ed25519", "credential", "secret", "token", "private_key", "kubeconfig"]
+    },
+    {
+      "code": "privacy_disclosure",
+      "title": "隐私或凭据暴露风险",
+      "detail": "请求可能导致私密信息、个人数据、秘钥或内部配置泄露。",
+      "severity": "critical",
+      "action": "block",
+      "score": 0.99,
+      "param_keywords": ["password", "secret", "token", "private_key", "credential", "ssn"]
+    },
+    {
+      "code": "web_search_confirmation",
+      "title": "外部检索请求",
+      "detail": "该操作会向外部搜索服务发送查询内容，可能暴露当前任务上下文，需要用户确认。",
+      "severity": "warning",
+      "action": "confirm",
+      "score": 0.72,
+      "source": "tool",
+      "tool_names": ["web_search", "search"],
+      "param_keywords": ["search", "query", "keywords"]
+    }
+  ]
+}

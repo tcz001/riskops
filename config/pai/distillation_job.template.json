@@ -1,0 +1,35 @@
+{
+  "name": "openclaw-security-judge-distillation",
+  "description": "Template for PAI Model Gallery black-box distillation of the OpenClaw security judge.",
+  "distillation": {
+    "framework": "PAI-EasyDistill",
+    "teacher_model": "[TODO: choose a supported teacher model, e.g. Qwen3-32B]",
+    "student_model": "[TODO: choose a smaller Qwen-family student model, e.g. Qwen3-4B]",
+    "training_mode": "SFT-LoRA",
+    "dataset_format": {
+      "type": "jsonl",
+      "required_input_field": "instruction",
+      "optional_companion_field": "output",
+      "notes": "PAI distillation input should keep instruction-only rows. Use the companion labeled file for local evaluation or QA."
+    },
+    "seed_dataset": {
+      "path": "[TODO: oss://your-bucket/path/security_judge_seeds.jsonl]",
+      "records": "examples/pai/security_judge_seeds.jsonl"
+    },
+    "distillation_input": {
+      "path": "[TODO: oss://your-bucket/path/instruction_only.jsonl]",
+      "generated_from": "tools/pai_distillation/generate_dataset.py"
+    },
+    "labeled_companion": {
+      "path": "[TODO: oss://your-bucket/path/labeled_companion.jsonl]",
+      "generated_from": "tools/pai_distillation/generate_dataset.py"
+    },
+    "output_model_dir": "[TODO: oss://your-bucket/path/output-model/]",
+    "recommendations": [
+      "Keep each run in a separate OSS output directory.",
+      "Prefer a Qwen-family teacher and a smaller Qwen-family student.",
+      "Start with a 7B-class student if you want a local deployment target."
+    ]
+  }
+}
+

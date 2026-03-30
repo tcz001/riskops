@@ -1,0 +1,22 @@
+{
+  "plugins": {
+    "enabled": true,
+    "load": {
+      "paths": [
+        "/Users/fanjiang/Documents/riskops/.openclaw/extensions/openclaw-risk-guard"
+      ]
+    },
+    "entries": {
+      "openclaw-risk-guard": {
+        "enabled": true,
+        "config": {
+          "baseUrl": "http://127.0.0.1:8099",
+          "requestTimeoutMs": 3000,
+          "approvalTimeoutMs": 120000,
+          "approvalTimeoutBehavior": "deny",
+          "failOpen": false
+        }
+      }
+    }
+  }
+}

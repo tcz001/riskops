@@ -1,0 +1,37 @@
+{
+  "id": "openclaw-risk-guard",
+  "kind": "security",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "baseUrl": {
+        "type": "string",
+        "description": "Base URL of the local risk guard service."
+      },
+      "riskGuardBaseUrl": {
+        "type": "string",
+        "description": "Legacy alias for the local risk guard service URL."
+      },
+      "requestTimeoutMs": {
+        "type": "number",
+        "minimum": 100,
+        "description": "Timeout for requests to the local risk guard service."
+      },
+      "approvalTimeoutMs": {
+        "type": "number",
+        "minimum": 1000,
+        "description": "Maximum time to wait for user approval."
+      },
+      "approvalTimeoutBehavior": {
+        "type": "string",
+        "enum": ["deny", "cancel"],
+        "description": "Behavior when approval times out."
+      },
+      "failOpen": {
+        "type": "boolean",
+        "description": "Allow tool calls when the risk guard service is unavailable."
+      }
+    }
+  }
+}

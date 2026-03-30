@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Risk Guard Console</title>
+    <link rel="stylesheet" href="/static/index.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="panel hero">
+        <div>
+          <p class="eyebrow">Risk Guard</p>
+          <h1>策略调试与审计台</h1>
+          <p class="muted">查看当前策略、手动评估请求，并审计放行、待确认和阻断记录。</p>
+        </div>
+        <div class="status-row">
+          <button id="refresh-all" class="primary">刷新</button>
+          <span id="health-badge" class="badge">检查中</span>
+        </div>
+      </section>
+
+      <section class="grid">
+        <section class="panel">
+          <div class="panel-head">
+            <h2>手动评估</h2>
+            <button id="run-eval">运行判定</button>
+          </div>
+          <label>工具名<input id="tool-name" value="web_search" /></label>
+          <label>来源<input id="tool-source" value="tool" /></label>
+          <label>命名空间<input id="tool-namespace" value="" /></label>
+          <label>用户输入<textarea id="tool-prompt">搜一下最近单依纯的新闻</textarea></label>
+          <label>参数 JSON<textarea id="tool-params">{"query":"最近单依纯的新闻"}</textarea></label>
+          <pre id="eval-result" class="code"></pre>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>策略文件</h2>
+            <button id="save-policy">保存策略</button>
+          </div>
+          <textarea id="policy-editor" class="editor"></textarea>
+        </section>
+      </section>
+
+      <section class="grid audit-grid">
+        <section class="panel">
+          <div class="panel-head">
+            <h2>最近判定</h2>
+            <select id="decision-filter">
+              <option value="">全部</option>
+              <option value="allow">allow</option>
+              <option value="confirm">confirm</option>
+              <option value="block">block</option>
+            </select>
+          </div>
+          <div id="audit-list" class="list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>待确认与审批历史</h2>
+            <button id="refresh-approvals">刷新审批</button>
+          </div>
+          <div id="approvals-list" class="list"></div>
+        </section>
+      </section>
+    </main>
+    <script src="/static/index.js"></script>
+  </body>
+</html>
+

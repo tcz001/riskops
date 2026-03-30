@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+.pycache/
+*.py[cod]
+
+# Environment
+.env
+.venv/
+venv/
+
+# Local data and databases
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# Logs and runtime artifacts
+*.log
+*.pid
+
+# macOS
+.DS_Store
+
+# Editors
+.idea/
+.vscode/
